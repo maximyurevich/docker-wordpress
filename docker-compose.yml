@@ -1,0 +1,95 @@
+version: "3"
+
+services:
+
+  wordpress:
+    container_name: wordpress
+    build: 
+      dockerfile: Dockerfile
+      context: .
+    depends_on: 
+      - mysql
+      - memcached
+    restart: always
+    environment:
+      - WORDPRESS_DB_USER=${DB_USER}
+      - WORDPRESS_DB_PASSWORD=${DB_PASSWORD}
+      - WORDPRESS_DB_NAME=${DB_NAME}
+      - XDEBUG_CONFIG=client_host=172.17.0.1
+    volumes:
+      - ./wordpress:/var/www/html
+    env_file: 
+      - .env
+    networks:
+      - default
+  
+  
+  mysql:
+    image: mysql:5.7
+    restart: always
+    # --default-authentication-plugin=mysql_native_password
+    command: --max_allowed_packet=32505856
+    environment: 
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./db:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    env_file: 
+      - .env
+    networks:
+      - default
+
+  nginx:
+    depends_on: 
+       - wordpress
+       - memcached
+    image: nginx:latest
+    restart: always
+    volumes:
+       - ./wordpress:/var/www/html
+       - ./nginx:/etc/nginx/conf.d
+       - ./logs:/var/log/nginx/
+    ports: 
+      - "80:80"
+      - "443:443"
+    networks:
+      - default
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - MEMORY_LIMIT=${MEMORY_LIMIT}
+      - UPLOAD_LIMIT=${UPLOAD_LIMIT}
+      - MAX_EXECUTION_TIME=${MAX_EXECUTION_TIME}
+      - PMA_HOST=${PMA_HOST}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+    depends_on:
+      - mysql
+    restart: always
+    ports:
+      - "8000:80"
+    env_file: 
+      - .env
+    networks:
+      - default
+
+  memcached:
+    image: memcached
+    restart: always
+    
+volumes:
+  nginx:
+  wordpress:
+  db:
+
+networks:
+  default:
+    driver: bridge
+
+
