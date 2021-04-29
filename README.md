@@ -20,6 +20,3 @@ This is docker stack for my personal usage, may be useful for your projects.
 `$ chmod +x certs.sh`
 
 `$ bash certs.sh`
-
-## Permissions
-`$ docker-compose exec -u www-data wordpress id -u`
