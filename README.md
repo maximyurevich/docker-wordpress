@@ -5,11 +5,12 @@ This is docker stack for my personal usage, may be useful for your projects.
 ## Stack
 
 * Wordpress
-* MySQL
+* MySQL 5.7
 * PHPMyAdmin
 * Nginx
-* Xdebug
-* Node
+* Xdebug 3
+* Node 10
+* Gulp 2.3.0
 
 ## Installation
 
