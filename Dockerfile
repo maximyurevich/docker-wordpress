@@ -23,7 +23,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 # Node
 RUN apt-get update && curl -sL https://deb.nodesource.com/setup_8.x | bash - \
-  && apt-get install -y python2 nodejs \ 
+  && apt-get install -y python2 apt-utils nodejs \ 
   && curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | tee /usr/share/keyrings/yarnkey.gpg >/dev/null \
   && echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | tee /etc/apt/sources.list.d/yarn.list \ 
   && apt-get update && apt-get install -y yarn
