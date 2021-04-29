@@ -12,7 +12,7 @@
         "log": true,
         "externalConsole": false,
         "pathMappings": {
-          "/var/www/html": "/home/maxim/Documents/Docker/wordpress/wordpress"
+          "/var/www/html": "${workspaceFolder}/wordpress"
         },
         "ignore": [
           "**/vendor/**/*.php"
