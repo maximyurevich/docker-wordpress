@@ -9,8 +9,6 @@ This is docker stack for my personal usage, may be useful for your projects.
 * PHPMyAdmin
 * Nginx
 * Xdebug 3
-* Node 10
-* Gulp 2.3.0
 
 ## Installation
 
