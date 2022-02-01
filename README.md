@@ -30,10 +30,6 @@ This is docker stack for my personal usage, may be useful for your projects.
 
 `$ bash remove_all.sh`
 
-#### Removing certificates
-
-`$ bash remove_certs.sh`
-
 #### Removing nginx logs
 
 `$ bash remove_logs.sh`
