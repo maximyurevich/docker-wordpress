@@ -22,7 +22,7 @@ This is docker stack for my personal usage, may be useful for your projects.
 
 ## Removing files
 
-`$ chmod +x remove_all.sh remove_certs.sh remove_logs.sh remove_wordpress.sh`
+`$ chmod +x remove_all.sh remove_logs.sh remove_wordpress.sh`
 
 ### Usage
 
